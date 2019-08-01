@@ -1,5 +1,6 @@
 <html>
 	<body>
-		Hello SpringBoot !!
+		<h1 th:text="${name}">Hello SpringBoot !!</h1> <!-- Hello SpringBoot !!被覆盖，取不到数据也不会显示Hello SpringBoot !!-->
+		<h1 th:text="${age}">Hello SpringBoot !!</h1>
 	</body>
 </html>
