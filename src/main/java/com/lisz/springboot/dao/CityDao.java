@@ -33,4 +33,22 @@ public class CityDao {
 		}
 	}
 
+	public void update(City city) {
+		if (dataMap.containsKey(city.getId())) {
+			dataMap.put(city.getId(), city);
+			System.out.println("City updated: " + city);
+		} else {
+			throw new IllegalArgumentException("City key does not exist");
+		}
+	}
+
+	public void deleteById(Integer id) {
+		if (dataMap.containsKey(id)) {
+			City removedCity = dataMap.remove(id);
+			System.out.println("City removed: " + removedCity);
+		} else {
+			throw new IllegalArgumentException("City key does not exist");
+		}
+	}
+
 }

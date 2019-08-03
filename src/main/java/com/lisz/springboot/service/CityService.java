@@ -19,8 +19,14 @@ public class CityService {
 		return list;
 	}
 
-	public void add(City city) {
-		cityDao.add(city);
+	public String add(City city) {
+		try {
+			cityDao.add(city);
+			return "保存成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "保存失败";
+		}
 	}
 
 	public String add(Integer id, String name) {
@@ -33,5 +39,25 @@ public class CityService {
 			return "保存失败";
 		}
 	}
-	
+
+	public String update(Integer id, String name) {
+		City city = new City(id, name);
+		try {
+			cityDao.update(city);
+			return "更新成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "更新失败";
+		}
+	}
+
+	public String deleteById(Integer id) {
+		try {
+			cityDao.deleteById(id);
+			return "删除成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "删除失败";
+		}
+	}
 }

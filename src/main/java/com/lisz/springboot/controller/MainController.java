@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ import com.lisz.springboot.service.CityService;
  */
 @Controller
 @RequestMapping("/user")
-public class MainController { //Controller里写逻辑的跳转和参数的传递
+public class MainController { //Controller里写逻辑的跳转和参数的传递, 解耦合，一个方法最多10来行
 	
 	@Autowired
 	private CityService cityService;
@@ -52,14 +53,39 @@ public class MainController { //Controller里写逻辑的跳转和参数的传�
 	}
 	
 	@PostMapping("/add")
-	public String add(@RequestParam("id") Integer id, @RequestParam("name") String name, Model model) {
-		String success = cityService.add(id, name);
+	public String add(@ModelAttribute City city,/*@RequestParam("id") Integer id, @RequestParam("name") String name,*/ Model model) {
+		/*String success = cityService.add(id, name);*/
+		String success = cityService.add(city);
 		model.addAttribute("success", success);
 		return "add";
 	}
 	
-	@RequestMapping("/addPage")
+	@PostMapping("/update")
+	public String add(@RequestParam Integer id, @RequestParam String name, Model model) {//变量名与前端一致就不用再@RequestParam("id")
+		String success = cityService.update(id, name);
+		model.addAttribute("success", success);
+		return "update";
+	}
+	
+	@PostMapping("/delete")
+	public String add(@RequestParam Integer id, Model model) {
+		String success = cityService.deleteById(id);
+		model.addAttribute("success", success);
+		return "delete";
+	}
+	
+	@GetMapping("/addPage")//@RequestMapping 也可以
 	public String add() {
 		return "add";
+	}
+	
+	@RequestMapping("/updatePage")
+	public String update() {
+		return "update";
+	}
+	
+	@RequestMapping("/deletePage")
+	public String delete() {
+		return "delete";
 	}
 }
