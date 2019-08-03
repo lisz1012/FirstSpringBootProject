@@ -1,6 +1,16 @@
 <html>
 	<body>
-		<h1 th:text="${name}">Hello SpringBoot !!</h1> <!-- Hello SpringBoot !!被覆盖，取不到数据也不会显示Hello SpringBoot !!-->
-		<h1 th:text="${age}">Hello SpringBoot !!</h1>
+		City List
+		<hr>
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+			</tr>
+			<tr th:each="city : ${list}">
+				<td th:text="${city.id}"></td> <!-- City 会以反射的方法调用getters，所以必须得写get方法 -->
+				<td th:text="${city.name}"></td>
+			</tr> <!-- "${}" 表示的是从scope动态取值 -->
+		</table>
 	</body>
 </html>
