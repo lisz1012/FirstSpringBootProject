@@ -68,7 +68,7 @@ public class MainController { //Controller里写逻辑的跳转和参数的传�
 	}
 	
 	@PostMapping("/delete")
-	public String add(@RequestParam Integer id, Model model) {
+	public String delete(@RequestParam Integer id, Model model) {
 		String success = cityService.deleteById(id);
 		model.addAttribute("success", success);
 		return "delete";
